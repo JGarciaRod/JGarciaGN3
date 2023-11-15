@@ -3,8 +3,10 @@
     ViewBag.Title = "Form";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h2>Nuevo Salario</h2>
+<div class="text-center">
+    <h2>Nuevo Salario</h2>
+</div>
+<hr />
 
 @using (Html.BeginForm("Form", "Sueldo", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
@@ -19,21 +21,21 @@
         </div>
 
         <div class="col-md-3">
-            @Html.LabelFor(model => model.FormaPago, new { @class = "hidden" })
+            @Html.Label("Forma de pago")
             @Html.TextBoxFor(model => model.FormaPago, new { @class = "form-control", onkeypress = "return validarLetras(event,'lblFormaPago')" })
             <label id="lblFormaPago" style="color:#ff0000"></label>
         </div>
 
         <div class="col-md-3">
-            @Html.LabelFor(model => model.Empleado.ClaveEmpleado, new { @class = "hidden" })
-            @Html.DropDownListFor(model => model.Empleado.ClaveEmpleado, new SelectList(Model.Empleado.Empleados, "ClaveEmpleado", "NombreEmpleado"), "Selecciona un Emplaedo", new { @class = "form-controls" })
+            @Html.Label("Empleado")
+            @Html.DropDownListFor(model => model.Empleado.ClaveEmpleado, new SelectList(Model.Empleado.Empleados, "ClaveEmpleado", "NombreEmpleado"), "Selecciona un Emplaedo", new { @class = "form-control" })
         </div>
 
     </div>
 
     <div class="row">
         <div class="col-md-1">
-            <input type="submit" data-toggle="modal" class="btn btn-success btn-sm seach input-group" value="Guardar" />
+            <input type="submit" data-toggle="modal" class="btn btn-success" value="Guardar" />
         </div>
         <div class="col-md-1">
             <a id="back" class="btn btn-danger" href="@Url.Action("GetAll", "Sueldo")">Volver</a>
@@ -74,5 +76,3 @@
         }
     }
 </script>
-
-

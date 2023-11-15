@@ -4,7 +4,10 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Nuevos Departamentos</h2>
+<div class="text-center">
+    <h2>Formulario Departamentos</h2>
+</div>
+<hr />
 
 @using (Html.BeginForm("Form", "Departamento", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
@@ -12,17 +15,16 @@
 
     <div class="row">
 
-        <div class="col-md-3">
-            @Html.LabelFor(model => model.DescDepartamento, new { @class = "hidden" })
-            @Html.TextBoxFor(model => model.DescDepartamento, new { @class = "form-control", onkeypress = "return validarLetras(event,'lblDescDepartamento')" })
+        <div class="col-md-6">
+            @Html.TextBoxFor(model => model.DescDepartamento, new { @class = "form-control", onkeypress = "return validarLetras(event,'lblDescDepartamento')", @placeholder = "Nombre del departamento", @type = "text" })
             <label id="lblDescDepartamento" style="color:#ff0000"></label>
         </div>
 
-        <div class="col-md-1">
-            <input type="submit" data-toggle="modal" class="btn btn-success btn-sm seach input-group" value="Guardar" />
+        <div class="col-md-3">
+            <input type="submit" class="btn btn-success col-md-12" value="Guardar" />
         </div>
-        <div class="col-md-1">
-            <a id="back" class="btn btn-danger" href="@Url.Action("GetAll", "Departamento")">Volver</a>
+        <div class="col-md-3">
+            <a id="back" class="btn btn-danger col-md-12" href="@Url.Action("GetAll", "Departamento")">Volver</a>
         </div>
 
     </div>
@@ -47,4 +49,3 @@
         }
     }
 </script>
-
