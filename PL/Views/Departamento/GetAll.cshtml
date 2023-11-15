@@ -1,0 +1,46 @@
+﻿@model ML.Departamento
+@{
+    ViewBag.Title = "GetAll";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Departamentos</h2>
+
+<a class="btn btn-success" href="@Url.Action("Form", "Departamento", new {idDepartamento = 0})">
+    Nuevo Departamento
+</a>
+
+@if (Model.Departamentos != null)
+{
+    <div class="row">
+        @foreach (ML.Departamento departamento in Model.Departamentos)
+        {
+            <div class="card">
+                <div class="card-header">
+                    Destacado
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">@departamento.DescDepartamento</h5>
+                    <p class="card-text">Departamentos de la empresa</p>
+
+                    <a href="@Url.Action("Form", "Departamento", new {idDepartamento = departamento.IdDepartamento})" class="btn btn-primary">
+                        <i class="fa-solid fa-pen-to-square"></i>
+                    </a>
+
+                    <a href="@Url.Action("Delete", "Departamento", new {idDepartamento = departamento.IdDepartamento})"
+                       onclick="return confirm('Estas seguro que deseas eliminar el Departamento?');"
+                       class="btn btn-primary">
+                        <i class="fa-solid fa-delete-left"></i>
+                    </a>
+
+                </div>
+            </div>
+        }
+    </div>
+}
+else
+{
+    <div class="alert alert-success" role="alert">
+        Aun no tiene departamentos
+    </div>
+}

@@ -1,0 +1,66 @@
+﻿@model ML.Empleado
+@{
+    ViewBag.Title = "Form";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Nuevos Empleados</h2>
+
+@using (Html.BeginForm("Form", "Empleado", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.HiddenFor(model => model.ClaveEmpleado)
+
+    <div class="row">
+
+        <div class="col-md-3">
+            @Html.LabelFor(model => model.NombreEmpleado, new { @class = "hidden" })
+            @Html.TextBoxFor(model => model.NombreEmpleado, new { @class = "coll-auto", onkeypress = "return validarLetras(event,'lblNombreEmpleado')" })
+            <label id="lblNombreEmpleado" style="color:#ff0000"></label>
+        </div>
+
+        <div class="col-md-3">
+            @Html.LabelFor(model => model.FechaIngreso, new { @class = "hidden" })
+            @Html.TextBoxFor(model => model.FechaIngreso, new { @class = "coll-auto", @placeholder = "MM/DD/AAAA", @Type = "Date" })
+        </div>
+
+        <div class="col-md-3">
+            @Html.LabelFor(model => model.Depa.IdDepartamento, new { @class = "hidden" })
+            @Html.DropDownListFor(model => model.Depa.IdDepartamento, new SelectList(Model.Depa.Departamentos, "IdDepartamento", "DescDepartamento"), "Selecciona un departamento", new { @class = "form-controls" })
+        </div>
+
+        <div class="col-md-3">
+            @Html.LabelFor(model => model.FechaNacimeinto, new { @class = "hidden" })
+            @Html.TextBoxFor(model => model.FechaNacimeinto, new { @class = "coll-auto", @placeholder = "MM/DD/AAAA", @Type = "Date" })
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="col-md-1">
+            <input type="submit" data-toggle="modal" class="btn btn-success btn-sm seach input-group" value="Guardar" />
+        </div>
+        <div class="col-md-1">
+            <a id="back" class="btn btn-danger" href="@Url.Action("GetAll", "Empleado")">Volver</a>
+        </div>
+    </div>
+}
+
+
+@Scripts.Render("~/bundles/jquery")
+
+<script type="text/javascript">
+
+    function validarLetras(e, lbl) {
+        var key = e.keyCode;
+        if ((key >= 65 && key <= 90) || key == 8 || (key >= 97 && key <= 122)) {
+            $('#' + lbl).text('');
+            return true;
+        }
+        else {
+            $('#' + lbl).text('Solo se aceptan letras');
+            $('#' + lbl).css('color', 'red');
+
+            return false;
+        }
+    }
+</script>

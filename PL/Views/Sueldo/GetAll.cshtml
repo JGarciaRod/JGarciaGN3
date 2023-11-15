@@ -1,0 +1,58 @@
+﻿@model ML.Sueldo
+@{
+    ViewBag.Title = "GetAll";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Sueldos</h2>
+
+<a class="btn btn-success" href="@Url.Action("Form", "Sueldo", new {idSueldo = 0})">
+    Nuevo Sueldo
+</a>
+
+@if (Model.Sueldos != null)
+{
+
+<div class="row">
+        <div class="col-md-12">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Editar</th>
+                        <th>Nombre Empleado</th>
+                        <th>Cantidad</th>
+                        <th>Forma de pago</th>
+                        <th>Eliminar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (ML.Sueldo sueldo in Model.Sueldos)
+                {
+                        <tr>
+                            <td>
+                                <a class="btn btn-primary" href="@Url.Action("Form","Sueldo", new {idSueldo = sueldo.IdSueldo})">
+                                    <i class="fa-solid fa-pen"></i>
+                                </a>
+                            </td>
+                            <td>@sueldo.Empleado.NombreEmpleado</td>
+                            <td>@sueldo.Cantidad</td>
+                            <td>@sueldo.FormaPago</td>
+                            <td>
+                                <a class="btn btn-primary" href="@Url.Action("Delete","Sueldo", new {idSueldo = sueldo.IdSueldo})">
+                                    <i class="fa-solid fa-eraser"></i>
+                                </a>
+                            </td>
+                        </tr>
+                }
+                </tbody>
+            </table>
+        </div>
+    </div>
+}
+else
+{
+    <div class="alert alert-success" role="alert">
+        Aun no tiene sueldos
+    </div>
+}
+

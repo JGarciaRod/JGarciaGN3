@@ -1,0 +1,78 @@
+﻿@model ML.Sueldo
+@{
+    ViewBag.Title = "Form";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Nuevo Salario</h2>
+
+@using (Html.BeginForm("Form", "Sueldo", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.HiddenFor(model => model.IdSueldo)
+
+    <div class="row">
+
+        <div class="col-md-3">
+            @Html.LabelFor(model => model.Cantidad, new { @class = "hidden" })
+            @Html.TextBoxFor(model => model.Cantidad, new { @class = "coll-auto", onkeypress = "return isNumber(event,'lblCantidad')" })
+            <label id="lblCantidad" style="color:#ff0000"></label>
+        </div>
+
+        <div class="col-md-3">
+            @Html.LabelFor(model => model.FormaPago, new { @class = "hidden" })
+            @Html.TextBoxFor(model => model.FormaPago, new { @class = "coll-auto", onkeypress = "return validarLetras(event,'lblFormaPago')" })
+            <label id="lblFormaPago" style="color:#ff0000"></label>
+        </div>
+
+        <div class="col-md-3">
+            @Html.LabelFor(model => model.Empleado.ClaveEmpleado, new { @class = "hidden" })
+            @Html.DropDownListFor(model => model.Empleado.ClaveEmpleado, new SelectList(Model.Empleado.Empleados, "ClaveEmpleado", "NombreEmpleado"), "Selecciona un Emplaedo", new { @class = "form-controls" })
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="col-md-1">
+            <input type="submit" data-toggle="modal" class="btn btn-success btn-sm seach input-group" value="Guardar" />
+        </div>
+        <div class="col-md-1">
+            <a id="back" class="btn btn-danger" href="@Url.Action("GetAll", "Sueldo")">Volver</a>
+        </div>
+    </div>
+}
+
+
+@Scripts.Render("~/bundles/jquery")
+
+<script type="text/javascript">
+
+    function validarLetras(e, lbl) {
+        var key = e.keyCode;
+        if ((key >= 65 && key <= 90) || key == 8 || (key >= 97 && key <= 122)) {
+            $('#' + lbl).text('');
+            return true;
+        }
+        else {
+            $('#' + lbl).text('Solo se aceptan letras');
+            $('#' + lbl).css('color', 'red');
+
+            return false;
+        }
+    }
+
+    function isNumber(evt, lbl) {
+        evt = (evt) ? evt : window.event;
+        var charCode = (evt.which) ? evt.which : evt.keyCode;
+        if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+            $('#' + lbl).text('Solo se aceptan numeros');
+            $('#' + lbl).css('color', 'red');
+            return false;
+        }
+        else {
+            $('#' + lbl).text('');
+            return true;
+        }
+    }
+</script>
+
+

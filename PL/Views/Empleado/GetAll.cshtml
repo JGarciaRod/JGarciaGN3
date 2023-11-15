@@ -1,0 +1,61 @@
+﻿@model ML.Empleado
+@{
+    ViewBag.Title = "GetAll";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Empleados</h2>
+
+<a class="btn btn-success" href="@Url.Action("Form", "Empleado", new {claveEmpleado = 0})">
+    Nuevo empleado
+</a>
+@if(Model.Empleados != null)
+            {
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Editar</th>
+                        <th>Nombre Empleado</th>
+                        <th>Fecha de ingreso</th>
+                        <th>Departamento</th>
+                        <th>Fecha de Nacimiento</th>
+                        <th>Eliminar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach(ML.Empleado empleado in Model.Empleados)
+                {
+                    <tr>
+                        <td>
+                            <a class="btn btn-primary" href="@Url.Action("Form","Empleado", new {claveEmpleado = empleado.ClaveEmpleado})">
+                                <i class="fa-solid fa-user-pen"></i>
+                            </a>
+                        </td>
+                        <td>@empleado.NombreEmpleado</td>
+                        <td>@empleado.FechaIngreso</td>
+                        <td>@empleado.Depa.DescDepartamento</td>
+                        <td>@empleado.FechaNacimeinto</td>
+                        <td>
+                            <a class="btn btn-primary" 
+                               href="@Url.Action("Delete","Empleado", new {claveEmpleado = empleado.ClaveEmpleado})"
+
+                               onclick="return confirm('Estas seguro que deseas eliminar el empleado?');">
+                                <i class="fa-solid fa-user-slash"></i>
+                            </a>
+                        </td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+            }
+else 
+{
+    <div class="alert alert-success" role="alert">
+        Aun no tiene empleados
+    </div>
+}

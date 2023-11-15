@@ -1,0 +1,50 @@
+﻿@model ML.Departamento
+@{
+    ViewBag.Title = "Form";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Nuevos Departamentos</h2>
+
+@using (Html.BeginForm("Form", "Departamento", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.HiddenFor(model => model.IdDepartamento)
+
+    <div class="row">
+
+        <div class="col-md-3">
+            @Html.LabelFor(model => model.DescDepartamento, new { @class = "hidden" })
+            @Html.TextBoxFor(model => model.DescDepartamento, new { @class = "coll-auto", onkeypress = "return validarLetras(event,'lblDescDepartamento')" })
+            <label id="lblDescDepartamento" style="color:#ff0000"></label>
+        </div>
+
+        <div class="col-md-1">
+            <input type="submit" data-toggle="modal" class="btn btn-success btn-sm seach input-group" value="Guardar" />
+        </div>
+        <div class="col-md-1">
+            <a id="back" class="btn btn-danger" href="@Url.Action("GetAll", "Departamento")">Volver</a>
+        </div>
+
+    </div>
+}
+
+
+@Scripts.Render("~/bundles/jquery")
+
+<script type="text/javascript">
+
+    function validarLetras(e, lbl) {
+        var key = e.keyCode;
+        if ((key >= 65 && key <= 90) || key == 8 || (key >= 97 && key <= 122)) {
+            $('#' + lbl).text('');
+            return true;
+        }
+        else {
+            $('#' + lbl).text('Solo se aceptan letras');
+            $('#' + lbl).css('color', 'red');
+
+            return false;
+        }
+    }
+</script>
+

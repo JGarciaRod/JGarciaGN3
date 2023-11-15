@@ -1,0 +1,427 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="JGarciarGN3Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Departamentos">
+          <Key>
+            <PropertyRef Name="IdDepartamento" />
+          </Key>
+          <Property Name="IdDepartamento" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DescDepartamento" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Empleados">
+          <Key>
+            <PropertyRef Name="ClaveEmpleado" />
+          </Key>
+          <Property Name="ClaveEmpleado" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NombreEmpleado" Type="varchar" MaxLength="50" />
+          <Property Name="FechaIngreso" Type="date" />
+          <Property Name="IdDepartamento" Type="int" />
+          <Property Name="FechaNacimiento" Type="date" />
+        </EntityType>
+        <EntityType Name="Sueldos">
+          <Key>
+            <PropertyRef Name="IdSueldos" />
+          </Key>
+          <Property Name="Cantidad" Type="float" />
+          <Property Name="FormaPago" Type="varchar" MaxLength="50" />
+          <Property Name="ClaveEmpleado" Type="int" />
+          <Property Name="IdSueldos" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Empleados__Fecha__1273C1CD">
+          <End Role="Departamentos" Type="Self.Departamentos" Multiplicity="0..1" />
+          <End Role="Empleados" Type="Self.Empleados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departamentos">
+              <PropertyRef Name="IdDepartamento" />
+            </Principal>
+            <Dependent Role="Empleados">
+              <PropertyRef Name="IdDepartamento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Sueldos__ClaveEm__145C0A3F">
+          <End Role="Empleados" Type="Self.Empleados" Multiplicity="0..1" />
+          <End Role="Sueldos" Type="Self.Sueldos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleados">
+              <PropertyRef Name="ClaveEmpleado" />
+            </Principal>
+            <Dependent Role="Sueldos">
+              <PropertyRef Name="ClaveEmpleado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="DepartamentoAdd" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="DescDepartamento" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="DepartamentoDelete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="iddepartamento" Type="int" Mode="In" />
+        </Function>
+        <Function Name="DepartamentosGetAll" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="DepartamentosGetById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idDepartamento" Type="int" Mode="In" />
+        </Function>
+        <Function Name="DepartamentoUpdate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idDepartamento" Type="int" Mode="In" />
+          <Parameter Name="descDepartamento" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="EmpleadoAdd" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="NombreEmpleado" Type="varchar" Mode="In" />
+          <Parameter Name="FechaIngreso" Type="date" Mode="In" />
+          <Parameter Name="IdDepartamento" Type="int" Mode="In" />
+          <Parameter Name="FechaNacimiento" Type="date" Mode="In" />
+        </Function>
+        <Function Name="EmpleadoDDL" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="EmpleadoDelete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="claveEmpleado" Type="int" Mode="In" />
+        </Function>
+        <Function Name="EmpleadoGetAll" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="EmpleadoGetById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ClaveEmplado" Type="int" Mode="In" />
+        </Function>
+        <Function Name="EmpleadoUpdate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="claveEmpleado" Type="int" Mode="In" />
+          <Parameter Name="NombreEmpleado" Type="varchar" Mode="In" />
+          <Parameter Name="FechaIngreso" Type="date" Mode="In" />
+          <Parameter Name="IdDepartamento" Type="int" Mode="In" />
+          <Parameter Name="FechaNacimiento" Type="date" Mode="In" />
+        </Function>
+        <Function Name="SueldoAdd" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="cantidad" Type="float" Mode="In" />
+          <Parameter Name="formaPago" Type="varchar" Mode="In" />
+          <Parameter Name="claveEmpleado" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SueldoDelete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idSueldo" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SueldoGetAll" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="SueldoGetById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idSueldo" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SueldoUpdate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idsuelado" Type="int" Mode="In" />
+          <Parameter Name="cantidad" Type="float" Mode="In" />
+          <Parameter Name="formaPago" Type="varchar" Mode="In" />
+          <Parameter Name="claveEmpleado" Type="int" Mode="In" />
+        </Function>
+        <EntityContainer Name="JGarciarGN3ModelStoreContainer">
+          <EntitySet Name="Departamentos" EntityType="Self.Departamentos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Empleados" EntityType="Self.Empleados" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sueldos" EntityType="Self.Sueldos" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Empleados__Fecha__1273C1CD" Association="Self.FK__Empleados__Fecha__1273C1CD">
+            <End Role="Departamentos" EntitySet="Departamentos" />
+            <End Role="Empleados" EntitySet="Empleados" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Sueldos__ClaveEm__145C0A3F" Association="Self.FK__Sueldos__ClaveEm__145C0A3F">
+            <End Role="Empleados" EntitySet="Empleados" />
+            <End Role="Sueldos" EntitySet="Sueldos" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="JGarciarGN3Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Departamento">
+          <Key>
+            <PropertyRef Name="IdDepartamento" />
+          </Key>
+          <Property Name="IdDepartamento" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DescDepartamento" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Empleados" Relationship="Self.FK__Empleados__Fecha__1273C1CD" FromRole="Departamentos" ToRole="Empleados" />
+        </EntityType>
+        <EntityType Name="Empleado">
+          <Key>
+            <PropertyRef Name="ClaveEmpleado" />
+          </Key>
+          <Property Name="ClaveEmpleado" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NombreEmpleado" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FechaIngreso" Type="DateTime" Precision="0" />
+          <Property Name="IdDepartamento" Type="Int32" />
+          <Property Name="FechaNacimiento" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Departamento" Relationship="Self.FK__Empleados__Fecha__1273C1CD" FromRole="Empleados" ToRole="Departamentos" />
+          <NavigationProperty Name="Sueldos" Relationship="JGarciarGN3Model.FK__Sueldos__ClaveEm__145C0A3F" FromRole="Empleado" ToRole="Sueldo" />
+        </EntityType>
+        <Association Name="FK__Empleados__Fecha__1273C1CD">
+          <End Role="Departamentos" Type="Self.Departamento" Multiplicity="0..1" />
+          <End Role="Empleados" Type="Self.Empleado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departamentos">
+              <PropertyRef Name="IdDepartamento" />
+            </Principal>
+            <Dependent Role="Empleados">
+              <PropertyRef Name="IdDepartamento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="JGarciarGN3Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Departamentos" EntityType="Self.Departamento" />
+          <EntitySet Name="Empleados" EntityType="Self.Empleado" />
+          <AssociationSet Name="FK__Empleados__Fecha__1273C1CD" Association="Self.FK__Empleados__Fecha__1273C1CD">
+            <End Role="Departamentos" EntitySet="Departamentos" />
+            <End Role="Empleados" EntitySet="Empleados" />
+          </AssociationSet>
+          <FunctionImport Name="EmpleadoAdd">
+            <Parameter Name="NombreEmpleado" Mode="In" Type="String" />
+            <Parameter Name="FechaIngreso" Mode="In" Type="DateTime" />
+            <Parameter Name="IdDepartamento" Mode="In" Type="Int32" />
+            <Parameter Name="FechaNacimiento" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="EmpleadoDelete">
+          <Parameter Name="claveEmpleado" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="EmpleadoGetAll" ReturnType="Collection(JGarciarGN3Model.EmpleadoGetAll_Result)" />
+          <FunctionImport Name="EmpleadoGetById" ReturnType="Collection(JGarciarGN3Model.EmpleadoGetById_Result)">
+          <Parameter Name="ClaveEmplado" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="EmpleadoUpdate">
+            <Parameter Name="claveEmpleado" Mode="In" Type="Int32" />
+            <Parameter Name="NombreEmpleado" Mode="In" Type="String" />
+            <Parameter Name="FechaIngreso" Mode="In" Type="DateTime" />
+            <Parameter Name="IdDepartamento" Mode="In" Type="Int32" />
+            <Parameter Name="FechaNacimiento" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <EntitySet Name="Sueldos" EntityType="JGarciarGN3Model.Sueldo" />
+          <AssociationSet Name="FK__Sueldos__ClaveEm__145C0A3F" Association="JGarciarGN3Model.FK__Sueldos__ClaveEm__145C0A3F">
+            <End Role="Empleado" EntitySet="Empleados" />
+            <End Role="Sueldo" EntitySet="Sueldos" />
+          </AssociationSet>
+          <FunctionImport Name="DepartamentosGetAll" ReturnType="Collection(JGarciarGN3Model.DepartamentosGetAll_Result)" />
+          <FunctionImport Name="DepartamentoAdd">
+          <Parameter Name="DescDepartamento" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="DepartamentoDelete">
+          <Parameter Name="iddepartamento" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="DepartamentosGetById" ReturnType="Collection(JGarciarGN3Model.DepartamentosGetById_Result)">
+          <Parameter Name="idDepartamento" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="DepartamentoUpdate">
+            <Parameter Name="idDepartamento" Mode="In" Type="Int32" />
+            <Parameter Name="descDepartamento" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="EmpleadoDDL" ReturnType="Collection(JGarciarGN3Model.EmpleadoDDL_Result)" />
+          <FunctionImport Name="SueldoAdd">
+            <Parameter Name="cantidad" Mode="In" Type="Double" />
+            <Parameter Name="formaPago" Mode="In" Type="String" />
+            <Parameter Name="claveEmpleado" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SueldoDelete">
+            <Parameter Name="idSueldo" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SueldoGetAll" ReturnType="Collection(JGarciarGN3Model.SueldoGetAll_Result)" />
+          <FunctionImport Name="SueldoGetById" ReturnType="Collection(JGarciarGN3Model.SueldoGetById_Result)">
+            <Parameter Name="idSueldo" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SueldoUpdate">
+            <Parameter Name="idsuelado" Mode="In" Type="Int32" />
+            <Parameter Name="cantidad" Mode="In" Type="Double" />
+            <Parameter Name="formaPago" Mode="In" Type="String" />
+            <Parameter Name="claveEmpleado" Mode="In" Type="Int32" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="EmpleadoGetAll_Result">
+          <Property Type="Int32" Name="ClaveEmpleado" Nullable="false" />
+          <Property Type="String" Name="NombreEmpleado" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="FechaIngreso" Nullable="true" />
+          <Property Type="Int32" Name="IdDepartamento" Nullable="false" />
+          <Property Type="String" Name="DescDepartamento" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="FechaNacimiento" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="EmpleadoGetById_Result">
+          <Property Type="Int32" Name="ClaveEmpleado" Nullable="false" />
+          <Property Type="String" Name="NombreEmpleado" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="FechaIngreso" Nullable="true" />
+          <Property Type="Int32" Name="IdDepartamento" Nullable="false" />
+          <Property Type="String" Name="DescDepartamento" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="FechaNacimiento" Nullable="true" />
+        </ComplexType>
+        <EntityType Name="Sueldo">
+          <Key>
+            <PropertyRef Name="IdSueldos" />
+          </Key>
+          <Property Name="Cantidad" Type="Double" />
+          <Property Name="FormaPago" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ClaveEmpleado" Type="Int32" />
+          <Property Name="IdSueldos" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Empleado" Relationship="JGarciarGN3Model.FK__Sueldos__ClaveEm__145C0A3F" FromRole="Sueldo" ToRole="Empleado" />
+        </EntityType>
+        <Association Name="FK__Sueldos__ClaveEm__145C0A3F">
+          <End Type="JGarciarGN3Model.Empleado" Role="Empleado" Multiplicity="0..1" />
+          <End Type="JGarciarGN3Model.Sueldo" Role="Sueldo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleado">
+              <PropertyRef Name="ClaveEmpleado" />
+            </Principal>
+            <Dependent Role="Sueldo">
+              <PropertyRef Name="ClaveEmpleado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="DepartamentosGetAll_Result">
+          <Property Type="Int32" Name="IdDepartamento" Nullable="false" />
+          <Property Type="String" Name="DescDepartamento" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="DepartamentosGetById_Result">
+          <Property Type="Int32" Name="IdDepartamento" Nullable="false" />
+          <Property Type="String" Name="DescDepartamento" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="EmpleadoDDL_Result">
+          <Property Type="Int32" Name="ClaveEmpleado" Nullable="false" />
+          <Property Type="String" Name="NombreEmpleado" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="SueldoGetAll_Result">
+          <Property Type="Int32" Name="IdSueldos" Nullable="false" />
+          <Property Type="Double" Name="Cantidad" Nullable="true" />
+          <Property Type="String" Name="FormaPago" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="ClaveEmpleado" Nullable="false" />
+          <Property Type="String" Name="NombreEmpleado" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="SueldoGetById_Result">
+          <Property Type="Int32" Name="IdSueldos" Nullable="false" />
+          <Property Type="Double" Name="Cantidad" Nullable="true" />
+          <Property Type="String" Name="FormaPago" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="ClaveEmpleado" Nullable="false" />
+          <Property Type="String" Name="NombreEmpleado" Nullable="true" MaxLength="50" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="JGarciarGN3ModelStoreContainer" CdmEntityContainer="JGarciarGN3Entities">
+          <EntitySetMapping Name="Departamentos">
+            <EntityTypeMapping TypeName="JGarciarGN3Model.Departamento">
+              <MappingFragment StoreEntitySet="Departamentos">
+                <ScalarProperty Name="IdDepartamento" ColumnName="IdDepartamento" />
+                <ScalarProperty Name="DescDepartamento" ColumnName="DescDepartamento" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Empleados">
+            <EntityTypeMapping TypeName="JGarciarGN3Model.Empleado">
+              <MappingFragment StoreEntitySet="Empleados">
+                <ScalarProperty Name="ClaveEmpleado" ColumnName="ClaveEmpleado" />
+                <ScalarProperty Name="NombreEmpleado" ColumnName="NombreEmpleado" />
+                <ScalarProperty Name="FechaIngreso" ColumnName="FechaIngreso" />
+                <ScalarProperty Name="IdDepartamento" ColumnName="IdDepartamento" />
+                <ScalarProperty Name="FechaNacimiento" ColumnName="FechaNacimiento" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="EmpleadoAdd" FunctionName="JGarciarGN3Model.Store.EmpleadoAdd" />
+          <FunctionImportMapping FunctionImportName="EmpleadoDelete" FunctionName="JGarciarGN3Model.Store.EmpleadoDelete" />
+          <FunctionImportMapping FunctionImportName="EmpleadoGetAll" FunctionName="JGarciarGN3Model.Store.EmpleadoGetAll">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="JGarciarGN3Model.EmpleadoGetAll_Result">
+                <ScalarProperty Name="ClaveEmpleado" ColumnName="ClaveEmpleado" />
+                <ScalarProperty Name="NombreEmpleado" ColumnName="NombreEmpleado" />
+                <ScalarProperty Name="FechaIngreso" ColumnName="FechaIngreso" />
+                <ScalarProperty Name="IdDepartamento" ColumnName="IdDepartamento" />
+                <ScalarProperty Name="DescDepartamento" ColumnName="DescDepartamento" />
+                <ScalarProperty Name="FechaNacimiento" ColumnName="FechaNacimiento" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="EmpleadoGetById" FunctionName="JGarciarGN3Model.Store.EmpleadoGetById">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="JGarciarGN3Model.EmpleadoGetById_Result">
+                <ScalarProperty Name="ClaveEmpleado" ColumnName="ClaveEmpleado" />
+                <ScalarProperty Name="NombreEmpleado" ColumnName="NombreEmpleado" />
+                <ScalarProperty Name="FechaIngreso" ColumnName="FechaIngreso" />
+                <ScalarProperty Name="IdDepartamento" ColumnName="IdDepartamento" />
+                <ScalarProperty Name="DescDepartamento" ColumnName="DescDepartamento" />
+                <ScalarProperty Name="FechaNacimiento" ColumnName="FechaNacimiento" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="EmpleadoUpdate" FunctionName="JGarciarGN3Model.Store.EmpleadoUpdate" />
+          <EntitySetMapping Name="Sueldos">
+            <EntityTypeMapping TypeName="JGarciarGN3Model.Sueldo">
+              <MappingFragment StoreEntitySet="Sueldos">
+                <ScalarProperty Name="IdSueldos" ColumnName="IdSueldos" />
+                <ScalarProperty Name="ClaveEmpleado" ColumnName="ClaveEmpleado" />
+                <ScalarProperty Name="FormaPago" ColumnName="FormaPago" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="DepartamentosGetAll" FunctionName="JGarciarGN3Model.Store.DepartamentosGetAll">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="JGarciarGN3Model.DepartamentosGetAll_Result">
+                <ScalarProperty Name="IdDepartamento" ColumnName="IdDepartamento" />
+                <ScalarProperty Name="DescDepartamento" ColumnName="DescDepartamento" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="DepartamentoAdd" FunctionName="JGarciarGN3Model.Store.DepartamentoAdd" />
+          <FunctionImportMapping FunctionImportName="DepartamentoDelete" FunctionName="JGarciarGN3Model.Store.DepartamentoDelete" />
+          <FunctionImportMapping FunctionImportName="DepartamentosGetById" FunctionName="JGarciarGN3Model.Store.DepartamentosGetById">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="JGarciarGN3Model.DepartamentosGetById_Result">
+                <ScalarProperty Name="IdDepartamento" ColumnName="IdDepartamento" />
+                <ScalarProperty Name="DescDepartamento" ColumnName="DescDepartamento" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="DepartamentoUpdate" FunctionName="JGarciarGN3Model.Store.DepartamentoUpdate" />
+          <FunctionImportMapping FunctionImportName="EmpleadoDDL" FunctionName="JGarciarGN3Model.Store.EmpleadoDDL">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="JGarciarGN3Model.EmpleadoDDL_Result">
+                <ScalarProperty Name="ClaveEmpleado" ColumnName="ClaveEmpleado" />
+                <ScalarProperty Name="NombreEmpleado" ColumnName="NombreEmpleado" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SueldoAdd" FunctionName="JGarciarGN3Model.Store.SueldoAdd" />
+          <FunctionImportMapping FunctionImportName="SueldoDelete" FunctionName="JGarciarGN3Model.Store.SueldoDelete" />
+          <FunctionImportMapping FunctionImportName="SueldoGetAll" FunctionName="JGarciarGN3Model.Store.SueldoGetAll">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="JGarciarGN3Model.SueldoGetAll_Result">
+                <ScalarProperty Name="IdSueldos" ColumnName="IdSueldos" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="FormaPago" ColumnName="FormaPago" />
+                <ScalarProperty Name="ClaveEmpleado" ColumnName="ClaveEmpleado" />
+                <ScalarProperty Name="NombreEmpleado" ColumnName="NombreEmpleado" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SueldoGetById" FunctionName="JGarciarGN3Model.Store.SueldoGetById">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="JGarciarGN3Model.SueldoGetById_Result">
+                <ScalarProperty Name="IdSueldos" ColumnName="IdSueldos" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="FormaPago" ColumnName="FormaPago" />
+                <ScalarProperty Name="ClaveEmpleado" ColumnName="ClaveEmpleado" />
+                <ScalarProperty Name="NombreEmpleado" ColumnName="NombreEmpleado" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SueldoUpdate" FunctionName="JGarciarGN3Model.Store.SueldoUpdate" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
